@@ -1,1 +1,1 @@
-# algorithm-sm2
+# javascript-algorithm-sm2
