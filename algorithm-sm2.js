@@ -1,4 +1,3 @@
-
 // algorithm SM-2
 // http://super-memory.com/english/ol/sm2.htm
 //
@@ -53,26 +52,24 @@ function calculateEF(ef, q) {
  * 2 - incorrect response; where the correct one seemed easy to recall
  * 1 - incorrect response; the correct one remembered
  * 0 - complete blackout.
- * @param {number} n - the n-th repetition (in days)
- * @param {number} ef - E-Factor of a given item
- * @param {number} i - inter-repetition interval after the n-th repetition (in days)
- * */
-function algorithmSM2(q, n, ef, i) {
-    i = calculateIntervals(n, ef);
+ * @param {object} properties - tracked properties of item
+ * @param {number} properties.n - the n-th repetition (in days)
+ * @param {number} properties.ef - E-Factor of a given item
+ * @param {number} properties.i - inter-repetition interval after the n-th repetition (in days)
+ * @returns {object} tracked properties of item
+ */
+function algorithmSM2(q, properties) {
+    properties.i = calculateIntervals(properties.n, properties.ef);
 
-    ef = calculateEF(ef, q);
+    properties.ef = calculateEF(properties.ef, q);
 
-    if (ef < 1.3) {
-        ef = 1.3;
+    if (properties.ef < 1.3) {
+        properties.ef = 1.3;
     }
 
     if (q < 3) {
-        i = calculateIntervals(1, ef);
+        properties.i = calculateIntervals(1, properties.ef);
     }
 
-    return {
-        n: n,
-        ef: ef,
-        i: i
-    };
+    return properties;
 }
