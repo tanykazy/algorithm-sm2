@@ -52,24 +52,24 @@ function calculateEF(ef, q) {
  * 2 - incorrect response; where the correct one seemed easy to recall
  * 1 - incorrect response; the correct one remembered
  * 0 - complete blackout.
- * @param {object} properties - tracked properties of item
- * @param {number} properties.n - the n-th repetition (in days)
- * @param {number} properties.ef - E-Factor of a given item
- * @param {number} properties.i - inter-repetition interval after the n-th repetition (in days)
- * @returns {object} tracked properties of item
+ * @param {object} prop - tracked prop of item
+ * @param {number} prop.n - the n-th repetition (in days)
+ * @param {number} prop.ef - E-Factor of a given item
+ * @param {number} prop.i - inter-repetition interval after the n-th repetition (in days)
+ * @returns {object} tracked prop of item
  */
-function algorithmSM2(q, properties) {
-    properties.i = calculateIntervals(properties.n, properties.ef);
+function algorithmSM2(q, prop) {
+    prop.i = calculateIntervals(prop.n, prop.ef);
 
-    properties.ef = calculateEF(properties.ef, q);
+    prop.ef = calculateEF(prop.ef, q);
 
-    if (properties.ef < 1.3) {
-        properties.ef = 1.3;
+    if (prop.ef < 1.3) {
+        prop.ef = 1.3;
     }
 
     if (q < 3) {
-        properties.i = calculateIntervals(1, properties.ef);
+        prop.i = calculateIntervals(1, prop.ef);
     }
 
-    return properties;
+    return prop;
 }
